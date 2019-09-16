@@ -35,20 +35,6 @@ namespace BattleShip.Boards
                                       w.Coordinate.Column <= endColumn).ToList();
         }
 
-        private void InitGrid()
-        {
-            for (int row = 1; row <= ROW_COUNT; row++)
-            {
-                for (int column = 1; column <= COLUMN_COUNT; column++)
-                {
-                    Squares.Add(new Square
-                    {
-                        Coordinate = new Coordinate(row, column)
-                    });
-                }
-            }
-        }
-
         internal void ValidateShipLocation(int startRow, int startColumn, int endColumn, int endRow, Ship ship, ShipOrientation shipOrientation)
         {
             if (!IsOnBoard(endRow, endColumn, shipOrientation))
@@ -62,6 +48,19 @@ namespace BattleShip.Boards
             }
         }
 
+        private void InitGrid()
+        {
+            for (int row = 1; row <= ROW_COUNT; row++)
+            {
+                for (int column = 1; column <= COLUMN_COUNT; column++)
+                {
+                    Squares.Add(new Square
+                    {
+                        Coordinate = new Coordinate(row, column)
+                    });
+                }
+            }
+        }
 
         private bool IsOnBoard(int endRow, int endColumn, ShipOrientation shipOrientation)
         {

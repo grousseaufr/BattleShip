@@ -67,7 +67,9 @@ namespace BattleShip
                 }
                 catch (Exception)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Invalid coordinate. Format is \"row,column\". Values between 1 and 10.\n");
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
             }
 

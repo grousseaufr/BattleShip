@@ -36,35 +36,6 @@ namespace BattleShip.Players
             };
         }
 
-        internal string GetStatusMessage()
-        {
-            var message = new StringBuilder();
-
-            if(Ships.Any(a => a.HitCount > 0))
-            {
-                message.AppendLine($"{Name} current status:");
-
-                var hitShips = Ships.Where(w => w.HitCount > 0 && !w.IsSunk).ToList();
-                foreach (var item in hitShips)
-                {
-                    var plural = item.HitCount > 1 ? "s" : string.Empty;
-                    message.AppendLine($"{item.Name} : {item.HitCount} hit{plural}");
-                }
-
-                var sunkShips = Ships.Where(w => w.IsSunk).ToList();
-                foreach (var item in sunkShips)
-                {
-                    message.AppendLine($"{item.Name} : Sunk");
-                }
-
-                message.AppendLine($"Received {GameBoard.Squares.Count(c => c.IsHit)} hit shot");
-                message.AppendLine($"Received {GameBoard.Squares.Count(c => c.IsMiss)} missed shot");
-
-            }
-
-            return message.ToString();
-        }
-
         public void PlaceShips()
         {
             foreach (var ship in Ships)
@@ -75,7 +46,11 @@ namespace BattleShip.Players
                 var startColumn = shipPlacementSetup.StartCoordinate.Column;
 
                 PlaceShip(startRow, startColumn, ship, shipPlacementSetup.ShipOrientation);
+
+                Console.WriteLine($"{Name}'s {ship.Name} added");
             }
+
+            Console.WriteLine();
         }
 
         public void PlaceShip(int startRow, int startColumn, Ship ship, ShipOrientation shipOrientation)
@@ -113,6 +88,35 @@ namespace BattleShip.Players
             }
 
             return AttackResult.Miss;
+        }
+
+        internal string GetStatusMessage()
+        {
+            var message = new StringBuilder();
+
+            if (Ships.Any(a => a.HitCount > 0))
+            {
+                message.AppendLine($"{Name} current status:");
+
+                var hitShips = Ships.Where(w => w.HitCount > 0 && !w.IsSunk).ToList();
+                foreach (var item in hitShips)
+                {
+                    var plural = item.HitCount > 1 ? "s" : string.Empty;
+                    message.AppendLine($"{item.Name} : {item.HitCount} hit{plural}");
+                }
+
+                var sunkShips = Ships.Where(w => w.IsSunk).ToList();
+                foreach (var item in sunkShips)
+                {
+                    message.AppendLine($"{item.Name} : Sunk");
+                }
+
+                message.AppendLine($"Received {GameBoard.Squares.Count(c => c.IsHit)} hit shot");
+                message.AppendLine($"Received {GameBoard.Squares.Count(c => c.IsMiss)} missed shot");
+
+            }
+
+            return message.ToString();
         }
 
         private readonly Dictionary<ShipType, ShipPlacementSetup> ShipPlacementSetup = new Dictionary<ShipType, ShipPlacementSetup>

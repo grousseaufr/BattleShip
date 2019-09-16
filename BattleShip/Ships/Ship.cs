@@ -25,4 +25,4 @@ namespace BattleShip.Ships
 	Cruiser	    3
 	Submarine	3
 	Destroyer	2
- * */
+*/

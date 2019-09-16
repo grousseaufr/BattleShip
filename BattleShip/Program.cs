@@ -6,6 +6,7 @@ namespace BattleShip
     {
         static void Main(string[] args)
         {
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("*** Welcome to battleship ***\n");
             Console.WriteLine("Coordinate must be in the following format : row,column");
             Console.WriteLine("Row/Column value between 1 and 10\n");
